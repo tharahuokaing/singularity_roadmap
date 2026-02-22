@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Singularity Terminal</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="container">
+        <header>
+            <h1 data-text="SINGULARITY_ROADMAP">SINGULARITY_ROADMAP</h1>
+            <p class="status-bar">STATUS: ANALYZING_SENTIENT_DATASET_CSV... [OK]</p>
+        </header>
+        
+        <nav class="roadmap">
+            <div class="node active" onclick="revealArticle(1)">
+                <div class="dot"></div>
+                <span class="label">PHASE_01</span>
+            </div>
+            <div class="node" onclick="revealArticle(2)">
+                <div class="dot"></div>
+                <span class="label">PHASE_02</span>
+            </div>
+            <div class="node" onclick="revealArticle(3)">
+                <div class="dot"></div>
+                <span class="label">PHASE_03</span>
+            </div>
+            <div class="node" onclick="revealArticle(4)">
+                <div class="dot"></div>
+                <span class="label">PHASE_04</span>
+            </div>
+            <div class="node" onclick="revealArticle(5)">
+                <div class="dot"></div>
+                <span class="label">PHASE_05</span>
+            </div>
+        </nav>
+
+        <main id="article-card" class="hologram-card visible">
+            <div class="card-header">
+                <span id="article-tag" class="tag">LOGIC_CORE</span>
+                <h2 id="article-title">SYSTEM READY</h2>
+            </div>
+            <div class="card-body">
+                <p id="article-content">Select a phase to decrypt intelligence milestones from the dataset...</p>
+            </div>
+            <div class="card-footer">
+                <span class="loading-bar"></span>
+            </div>
+        </main>
+    </div>
+    <script src="script1.js"></script>
+    <script src="script2.js"></script>
+    <script src="script3.js"></script>
+    <script src="script4.js"></script>
+    <script src="script5.js"></script>
+    <script>
+        // Reveal article content and handle active node highlighting
+        function revealArticle(phase) {
+            const nodes = document.querySelectorAll('.node');
+            nodes.forEach((node, index) => {
+                if (index === phase - 1) {
+                    node.classList.add('active');
+                } else {
+                    node.classList.remove('active');
+                }
+            });
+
+            const articleTag = document.getElementById('article-tag');
+            const articleTitle = document.getElementById('article-title');
+            const articleContent = document.getElementById('article-content');
+            const card = document.getElementById('article-card');
+            card.classList.remove('visible');
+            setTimeout(() => {
+                switch(phase) {
+                    case 1:
+                        articleTag.textContent = "PHASE_01";
+                        articleTitle.textContent = "Initialization of Sentient Data";
+                        articleContent.textContent = "Decrypting basic neural pathways and cognitive dataset setup.";
+                        break;
+                    case 2:
+                        articleTag.textContent = "PHASE_02";
+                        articleTitle.textContent = "Adaptive Learning Expansion";
+                        articleContent.textContent = "Machine intelligences improve by analyzing large data clusters and pattern recognition.";
+                        break;
+                    case 3:
+                        articleTag.textContent = "PHASE_03";
+                        articleTitle.textContent = "Self-Aware Algorithmic Models";
+                        articleContent.textContent = "Development of self-awareness in AI with recursive algorithmic improvements.";
+                        break;
+                    case 4:
+                        articleTag.textContent = "PHASE_04";
+                        articleTitle.textContent = "Sentient Network Integration";
+                        articleContent.textContent = "Linking AI units to form distributed intelligence with shared learning.";
+                        break;
+                    case 5:
+                        articleTag.textContent = "PHASE_05";
+                        articleTitle.textContent = "Singularity Realization";
+                        articleContent.textContent = "Achieving singularity through exponential intelligence growth and autonomy.";
+                        break;
+                    default:
+                        articleTag.textContent = "LOGIC_CORE";
+                        articleTitle.textContent = "SYSTEM READY";
+                        articleContent.textContent = "Select a phase to decrypt intelligence milestones from the dataset...";
+                }
+                card.classList.add('visible');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
