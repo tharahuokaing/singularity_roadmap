@@ -1,0 +1,187 @@
+/* styles.css - Updated with hologram effect */
+
+:root {
+    --cyan: #00f2ff;
+    --magenta: #ff00ea;
+    --bg: #020617;
+    --glass: rgba(0, 242, 255, 0.05);
+    --glow: rgba(0, 242, 255, 0.6);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--cyan);
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Background Scanline Effect */
+.scanline {
+    width: 100%;
+    height: 100px;
+    z-index: 10;
+    background: linear-gradient(0deg, rgba(0, 242, 255, 0) 0%, rgba(0, 242, 255, 0.1) 50%, rgba(0, 242, 255, 0) 100%);
+    opacity: 0.1;
+    position: absolute;
+    bottom: 100%;
+    animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+    to { bottom: -100px; }
+}
+
+.container {
+    max-width: 800px;
+    width: 90%;
+    margin-top: 5vh;
+}
+
+/* Roadmap Navigation */
+.roadmap {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+    position: relative;
+    padding: 0 20px;
+}
+
+.roadmap::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 0; right: 0;
+    height: 1px;
+    background: rgba(0, 242, 255, 0.2);
+}
+
+.node {
+    cursor: pointer;
+    text-align: center;
+    z-index: 5;
+    transition: 0.3s;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: var(--bg);
+    border: 2px solid var(--cyan);
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    box-shadow:
+        0 0 10px var(--glow),
+        0 0 20px var(--glow),
+        inset 0 0 8px var(--glow);
+    transition: 0.3s;
+}
+
+.node.active .dot {
+    background: var(--cyan);
+    box-shadow:
+        0 0 20px var(--cyan),
+        0 0 40px var(--magenta),
+        inset 0 0 12px var(--magenta);
+}
+
+.label { 
+    font-size: 10px; 
+    letter-spacing: 2px; 
+    text-shadow:
+        0 0 5px var(--cyan),
+        0 0 10px var(--magenta);
+}
+
+/* Hologram Card */
+.hologram-card {
+    background: linear-gradient(135deg, rgba(0,242,255,0.10) 0%, rgba(255,0,234,0.08) 100%);
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    padding: 30px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow:
+        0 0 10px var(--cyan),
+        0 0 30px var(--magenta),
+        inset 0 0 40px var(--magenta);
+    position: relative;
+    opacity: 0;
+    transform: perspective(500px) rotateX(10deg);
+    border-radius: 8px;
+    transition: all 0.5s ease-out;
+}
+
+.hologram-card.visible {
+    opacity: 1;
+    transform: perspective(500px) rotateX(0deg);
+}
+
+.hologram-card::before,
+.hologram-card::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    top: -10px; bottom: -10px; left: -10px; right: -10px;
+    z-index: -1;
+    border-radius: 10px;
+    background:
+      linear-gradient(45deg, var(--cyan), var(--magenta), var(--cyan), var(--magenta));
+    background-size: 400% 400%;
+    animation: holoGlow 6s linear infinite;
+    filter: blur(12px);
+    opacity: 0.7;
+}
+
+.hologram-card::after {
+    animation-delay: 3s;
+    filter: blur(18px);
+    opacity: 0.5;
+}
+
+@keyframes holoGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.tag {
+    background: var(--magenta);
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    margin-bottom: 10px;
+    display: inline-block;
+    text-shadow:
+        0 0 5px #ff00ea,
+        0 0 10px #ff00ea;
+}
+
+#article-title {
+    margin: 10px 0;
+    text-shadow:
+        2px 2px 6px rgba(255, 0, 234, 0.7),
+        0 0 20px var(--magenta);
+}
+
+#article-content {
+    line-height: 1.6;
+    color: #cbd5e1;
+    text-shadow: 0 0 6px rgba(0, 242, 255, 0.4);
+}
+
+.loading-bar {
+    display: block;
+    height: 2px;
+    background: var(--cyan);
+    width: 0%;
+    border-radius: 2px;
+}
+
+.visible .loading-bar {
+    animation: load 0.8s forwards;
+}
+
+@keyframes load {
+    to { width: 100%; }
+}
